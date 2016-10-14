@@ -1,0 +1,114 @@
+import processing.pdf.*;
+
+///*
+
+float angle, a;
+int circleW;
+int count=0;
+
+
+void setup() {
+//size(700, 400,PDF,"fra.pdf");
+size(700, 400);
+circleW = 3; //circle joint weight
+background(0);
+}
+
+void draw() {
+background(0);
+stroke(255);
+//a =mouseX; //branch angle
+a=30;
+angle = radians(a);
+translate(width/2, height);
+line(0, 0, 0, -120);
+translate(0, -120);
+branch(200);
+println(count);
+saveFrame("fractal.jpg");
+exit();
+}
+
+void branch(float h) {
+  h *= 0.6;
+//bHeight=h;
+//mousePressed==true;
+  if (h>60) {//make change here!!!using  110, 60, 40, 10
+   count++;
+   pushMatrix();
+   rotate(angle*2);
+   line(0, 0, 0, -h);
+   ellipse(0, -h, circleW, circleW);
+   translate(0, -h);
+   branch(h);//recursive here
+   popMatrix();
+   
+   pushMatrix();
+   rotate(angle);
+   line(0, 0, 0, -h);
+   ellipse(0, -h, circleW, circleW);
+   translate(0, -h);
+   branch(h);//recursive here
+   popMatrix();
+   pushMatrix();
+   rotate(-angle);
+   line(0, 0, 0, -h);
+   ellipse(0, -h, circleW, circleW);
+   translate(0, -h);
+   branch(h);//recursive here
+   popMatrix();
+   
+   pushMatrix();
+   rotate(-angle*2);
+   line(0, 0, 0, -h);
+   ellipse(0, -h, circleW, circleW);
+   translate(0, -h);
+   branch(h);//recursive here
+   popMatrix();
+ }
+}
+//*/
+
+
+//Koch
+/* 
+void setup() {
+  size(300, 300);
+  translate(45, 85);
+  background(55);
+  stroke(255);
+  noFill();
+ 
+  String str = "F-F+F-F";
+  float l = 70;
+ 
+  for (int i=0; i<5; i++) {
+    String temp = "";
+    for (int j=0; j<str.length (); j++) {
+      char c = str.charAt(j);
+      if (c == 'F') {
+        temp += "F-F+F-F";
+      } else {
+        temp += c;
+      }
+    }
+    str = temp;
+    l /= 3;
+  }
+ 
+  for (int i=0; i<3; i++) {
+    for (int j=0; j<str.length (); j++) {
+      char c = str.charAt(j);
+      if (c == 'F') {
+        line(0, 0, l, 0);
+        translate(l, 0);
+      } else if (c == '-') {
+        rotate(-PI/3);
+      } else if (c == '+') {
+        rotate(TWO_PI/3);
+      }
+    }
+    rotate(TWO_PI/3);
+  }
+}
+*/
